@@ -26,8 +26,10 @@ file itself:
         hdfs dfs -put README.md wordcount-input
         
         # Finally run example
-        ./run.sh
+        ./run.sh -i wordcount-input -o wordcount-output
         
         # Retrieve result
         hdfs dfs -getmerge wordcount-output wordcount-output.txt
 
+
+        
