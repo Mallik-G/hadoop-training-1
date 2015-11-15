@@ -11,6 +11,7 @@ import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.*;
 import org.apache.hadoop.util.Tool;
+import org.apache.hadoop.util.ToolRunner;
 import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
 import org.kohsuke.args4j.Option;
@@ -28,6 +29,11 @@ public class WordCount extends Configured implements Tool {
 
     @Option(name = "-o", aliases = "--outputDir", usage = "output directory", required = true)
     private String outputDir;
+
+    public static void main(String[] args) throws Exception {
+        int ret = ToolRunner.run(new WordCount(), args);
+        System.exit(ret);
+    }
 
     @Override
     public int run(String[] args) {
