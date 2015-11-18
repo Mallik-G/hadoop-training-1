@@ -1,4 +1,4 @@
-#!/bin/python
+#!/usr/bin/python
 
 from operator import itemgetter
 import sys
