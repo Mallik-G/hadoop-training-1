@@ -45,8 +45,11 @@ class WeatherReducer extends Reducer<Text,WeatherData,Text,WeatherData> {
                     minWind = val.minWind;
                 if (val.maxWind > maxWind)
                     maxWind = val.maxWind;
-                validTemp = true;
+                validWind = true;
             }
+
+            context.getCounter("Weather Reducer","Valid Wind").increment(val.validWind ? 1 : 0);
+            context.getCounter("Weather Reducer","Valid Temperature").increment(val.validTemperature ? 1 : 0);
         }
 
         result.validTemperature = validTemp;

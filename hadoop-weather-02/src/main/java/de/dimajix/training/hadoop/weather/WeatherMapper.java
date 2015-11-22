@@ -64,6 +64,9 @@ class WeatherMapper extends Mapper<LongWritable,Text,Text,WeatherData> {
         data.minWind = Float.valueOf(windSpeed) / 10.f;
         data.maxWind = Float.valueOf(windSpeed) / 10.f;
 
+        context.getCounter("Weather Mapper","Valid Wind").increment(data.validWind ? 1 : 0);
+        context.getCounter("Weather Mapper","Valid Temperature").increment(data.validTemperature ? 1 : 0);
+
         context.write(country, data);
     }
 }
