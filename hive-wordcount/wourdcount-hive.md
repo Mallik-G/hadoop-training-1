@@ -23,3 +23,17 @@ GROUP BY w.word
 ORDER BY cnt DESC 
 LIMIT 10;
 
+
+SELECT 
+    TRIM(w.word) AS word,
+    SUM(1) AS cnt 
+FROM
+    alice 
+LATERAL VIEW
+    EXPLODE(SPLIT(row,' ')) w AS word 
+WHERE
+    word <> ''
+GROUP BY w.word
+ORDER BY cnt DESC 
+LIMIT 10;
+
