@@ -1,6 +1,6 @@
-# WordCount
+# Weather
 
-This project contains an slightly more complex example to retrieve min/max temparatures grouped by countries.
+This project contains the Java Map/Reduce implementation of a simple weather analytics. 
 
 ## Building
 
@@ -19,17 +19,13 @@ Before running the example you have to upload some text into HDFS. In this examp
 file itself:
 
         # Create source directory
-        hdfs dfs -mkdir wordcount-input
-        # Create output directory
-        hdfs dfs -mkdir wordcount-output
+        hdfs dfs -mkdir weather
         # Upload text file
-        hdfs dfs -put README.md wordcount-input
+        hdfs dfs -put ../../data/weather/2011 weather
         
         # Finally run example
-        ./run.sh -i wordcount-input -o wordcount-output
+        ./run.sh -i weather/2011 -o weather/minmax
         
         # Retrieve result
-        hdfs dfs -getmerge wordcount-output wordcount-output.txt
+        hdfs dfs -cat weather/minmax
 
-
-        
