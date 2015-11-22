@@ -33,8 +33,6 @@ class WeatherMapper extends Mapper<LongWritable,Text,Text,WeatherData> {
                 String stationCcode = usaf + wban;
                 countries.put(stationCcode, country);
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -53,12 +51,19 @@ class WeatherMapper extends Mapper<LongWritable,Text,Text,WeatherData> {
         Character airTemperatureQuality = row.charAt(92);
         String airTemperature = row.substring(87,92);
 
-        // Only emit if quality is okay
-        if (airTemperatureQuality.charValue() == '1') {
-            country.set(countries.get(station));
-            data.minTemperature = Float.valueOf(airTemperature) / 10.f;
-            data.maxTemperature = Float.valueOf(airTemperature) / 10.f;
-            context.write(country, data);
-        }
+        Character windSpeedQuality = row.charAt(69);
+        String windSpeed = row.substring(65,69);
+
+        country.set(countries.get(station));
+
+        data.validTemperature = airTemperatureQuality == '1';
+        data.minTemperature = Float.valueOf(airTemperature) / 10.f;
+        data.maxTemperature = Float.valueOf(airTemperature) / 10.f;
+
+        data.validWind = windSpeedQuality == '1';
+        data.minWind = Float.valueOf(windSpeed) / 10.f;
+        data.maxWind = Float.valueOf(windSpeed) / 10.f;
+
+        context.write(country, data);
     }
 }

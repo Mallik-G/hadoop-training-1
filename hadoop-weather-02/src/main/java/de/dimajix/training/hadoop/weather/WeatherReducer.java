@@ -25,17 +25,36 @@ class WeatherReducer extends Reducer<Text,WeatherData,Text,WeatherData> {
         // Initialize variables such that the first real temperature will overwrite them
         float minTemp = 9999;
         float maxTemp = -9999;
+        boolean validTemp = false;
+        float minWind = 9999;
+        float maxWind = -9999;
+        boolean validWind = false;
 
         // Process all temperature values
         for (WeatherData val : values) {
-            if (val.minTemperature < minTemp)
-                minTemp = val.minTemperature;
-            if (val.maxTemperature > maxTemp)
-                maxTemp = val.maxTemperature;
+            if (val.validTemperature) {
+                if (val.minTemperature < minTemp)
+                    minTemp = val.minTemperature;
+                if (val.maxTemperature > maxTemp)
+                    maxTemp = val.maxTemperature;
+                validTemp = true;
+            }
+
+            if (val.validWind) {
+                if (val.minWind < minTemp)
+                    minTemp = val.minWind;
+                if (val.maxWind > maxTemp)
+                    maxTemp = val.maxWind;
+                validTemp = true;
+            }
         }
 
+        result.validTemperature = validTemp;
         result.maxTemperature = maxTemp;
         result.minTemperature = minTemp;
+        result.validWind = validWind;
+        result.minWind = minWind;
+        result.maxWind = maxWind;
         context.write(key, result);
     }
 }
