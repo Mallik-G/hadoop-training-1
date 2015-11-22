@@ -41,10 +41,10 @@ class WeatherReducer extends Reducer<Text,WeatherData,Text,WeatherData> {
             }
 
             if (val.validWind) {
-                if (val.minWind < minTemp)
-                    minTemp = val.minWind;
-                if (val.maxWind > maxTemp)
-                    maxTemp = val.maxWind;
+                if (val.minWind < minWind)
+                    minWind = val.minWind;
+                if (val.maxWind > maxWind)
+                    maxWind = val.maxWind;
                 validTemp = true;
             }
         }
