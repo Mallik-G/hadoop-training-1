@@ -131,6 +131,7 @@
         <module>hadoop-wordcount-01</module>
         <module>hadoop-wordcount-02</module>
         <module>hadoop-wordcount-03</module>
+        <module>hadoop-weather-01</module>
     </modules>
 
     <repositories>
