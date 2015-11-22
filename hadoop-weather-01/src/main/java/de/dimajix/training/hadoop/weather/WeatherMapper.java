@@ -30,7 +30,7 @@ class WeatherMapper extends Mapper<LongWritable,Text,Text,FloatWritable> {
         String airTemperature = row.substring(87,92);
 
         // Only emit if quality is okay
-        if (airTemperatureQuality.equals("1")) {
+        if (airTemperatureQuality.charValue() == '1') {
             // country = countries[station]
             country.set(station);
             temperature.set(Float.valueOf(airTemperature));
