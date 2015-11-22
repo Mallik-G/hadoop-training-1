@@ -24,7 +24,7 @@ file itself:
         hdfs dfs -put ../../data/weather/2011 weather
         
         # Finally run example
-        ./run.sh -i weather/2011 -o weather/minmax
+        ./run.sh -i weather/2011 -o weather/minmax -c file:///home/cloudera/data/weather/ish-history.csv
         
         # Retrieve result
         hdfs dfs -cat weather/minmax

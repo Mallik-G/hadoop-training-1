@@ -21,6 +21,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 
 public class Weather extends Configured implements Tool {
@@ -31,6 +33,9 @@ public class Weather extends Configured implements Tool {
 
     @Option(name = "-o", aliases = "--outputDir", usage = "output directory", required = true)
     private String outputDir;
+
+    @Option(name = "-c", aliases = "--countryFile", usage = "file containing country lookups", required = true)
+    private String countryFile;
 
     public static void main(String[] args) throws Exception {
         int ret = ToolRunner.run(new Weather(), args);
@@ -47,16 +52,19 @@ public class Weather extends Configured implements Tool {
         try {
             runJob(conf);
         }
-        catch(IOException|InterruptedException|ClassNotFoundException ex) {
+        catch(IOException|InterruptedException|ClassNotFoundException|URISyntaxException ex) {
             throw new RuntimeException(ex.getMessage());
         }
 
         return 0;
     }
 
-    private boolean runJob(Configuration conf) throws IOException, InterruptedException, ClassNotFoundException {
+    private boolean runJob(Configuration conf) throws IOException, InterruptedException, ClassNotFoundException, URISyntaxException {
         Job job = Job.getInstance(conf, "Weather");
         job.setJarByClass(Weather.class);
+
+        // Add cache
+        job.addCacheFile(new URI(countryFile + "#countries"));
 
         // Configure input format and files
         job.setInputFormatClass(TextInputFormat.class);
