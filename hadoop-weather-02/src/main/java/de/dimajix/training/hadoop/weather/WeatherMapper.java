@@ -56,8 +56,8 @@ class WeatherMapper extends Mapper<LongWritable,Text,Text,WeatherData> {
         // Only emit if quality is okay
         if (airTemperatureQuality.charValue() == '1') {
             country.set(countries.get(station));
-            data.minTemperature = Float.valueOf(airTemperature);
-            data.maxTemperature = Float.valueOf(airTemperature);
+            data.minTemperature = Float.valueOf(airTemperature) / 10.f;
+            data.maxTemperature = Float.valueOf(airTemperature) / 10.f;
             context.write(country, data);
         }
     }

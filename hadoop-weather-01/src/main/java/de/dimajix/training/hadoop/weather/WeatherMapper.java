@@ -33,7 +33,7 @@ class WeatherMapper extends Mapper<LongWritable,Text,Text,FloatWritable> {
         if (airTemperatureQuality.charValue() == '1') {
             // country = countries[station]
             country.set(station);
-            temperature.set(Float.valueOf(airTemperature));
+            temperature.set(Float.valueOf(airTemperature) / 10.f);
             context.write(country, temperature);
         }
     }
