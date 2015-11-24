@@ -1,15 +1,26 @@
 # WordCount
-CREATE TABLE alice(row STRING) STORED AS TEXTFILE;
 
-LOAD DATA LOCAL INPATH "../../alice/*.txt" OVERWRITE INTO TABLE alice;
+## Load data
+ 
+```sql
+    CREATE TABLE alice(row STRING) STORED AS TEXTFILE;
+    LOAD DATA LOCAL INPATH "../../alice/*.txt" OVERWRITE INTO TABLE alice;
+```
 
 
+## Investigate
+
+```sql
 SELECT 
     EXPLODE(SPLIT(row,' ')) AS word 
 FROM alice
 LIMIT 10; 
+```
 
 
+## Perform Query
+
+```sql
 SELECT 
     TRIM(w.word) AS word,
     SUM(1) AS cnt 
@@ -22,8 +33,12 @@ WHERE
 GROUP BY w.word
 ORDER BY cnt DESC 
 LIMIT 10;
+```
 
 
+## Use LATERAL VIEW
+
+```sql
 SELECT 
     TRIM(w.word) AS word,
     SUM(1) AS cnt 
@@ -36,4 +51,4 @@ WHERE
 GROUP BY w.word
 ORDER BY cnt DESC 
 LIMIT 10;
-
+```
