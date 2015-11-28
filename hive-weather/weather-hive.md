@@ -11,7 +11,7 @@ CREATE TABLE weather_2011(data STRING) STORED AS TEXTFILE;
 ```
 
 ```sql
-LOAD DATA LOCAL INPATH '*.gz' INTO TABLE weather_2011;
+LOAD DATA LOCAL INPATH 'data/weather/2011*.gz' INTO TABLE weather_2011;
 ```
 
 ```sql
@@ -56,7 +56,9 @@ CREATE TABLE weather_raw(data STRING) PARTITIONED BY(year STRING) STORED AS TEXT
 We load local data into the table using the correct partition
 
 ```sql
-LOAD DATA LOCAL INPATH '*.gz' INTO TABLE weather_raw PARTITION(year=2011);
+LOAD DATA LOCAL INPATH 'data/weather/2009/*.gz' OVERWRITE INTO TABLE weather_raw PARTITION(year=2009);
+LOAD DATA LOCAL INPATH 'data/weather/2010/*.gz' OVERWRITE INTO TABLE weather_raw PARTITION(year=2010);
+LOAD DATA LOCAL INPATH 'data/weather/2011/*.gz' OVERWRITE INTO TABLE weather_raw PARTITION(year=2011);
 ```
 
 Then we'll create a new view
@@ -110,7 +112,7 @@ WITH SERDEPROPERTIES (
    "escapeChar"    = "\\"
 )
 STORED AS TEXTFILE;
-LOAD DATA LOCAL INPATH '../ish-history.csv' OVERWRITE INTO TABLE ish_raw;
+LOAD DATA LOCAL INPATH 'data/weather/ish-history.csv' OVERWRITE INTO TABLE ish_raw;
 ```
 
 Now we can perform exactly the same query as in Java examples:
@@ -128,15 +130,18 @@ WHERE
 GROUP BY ish.country;
 ```
 
-### For Impala
-
-Since Impala cannot use the SERDE from above, we need to convert the table
-in Hive. We use Parquet as file format.
-
+But we can also group by year:
 ```sql
-CREATE TABLE ish 
-    STORED AS PARQUET 
-AS 
-    SELECT * FROM ish_raw WHERE usaf <> 'USAF';
+SELECT 
+    ish.country,
+    w.year,
+    MIN(w.air_temperature) as tmin,
+    MAX(w.air_temperature) as tmax 
+FROM weather w
+INNER JOIN ish_raw ish 
+    ON w.usaf=ish.usaf 
+    AND w.wban=ish.wban
+WHERE
+    w.air_temperature_qual = "1"
+GROUP BY w.year,ish.country
 ```
-
