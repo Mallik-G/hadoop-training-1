@@ -11,9 +11,9 @@ weather = FOREACH weather_raw GENERATE
     SUBSTRING(data,60,63) AS wind_direction,
     SUBSTRING(data,63,64) AS wind_direction_qual,
     SUBSTRING(data,64,65) AS wind_observation,
-    (INT)SUBSTRING(data,65,69) AS wind_speed,
+    ((FLOAT)SUBSTRING(data,65,69))/10.0F AS wind_speed,
     (INT)SUBSTRING(data,69,70) AS wind_speed_qual,
-    (INT)SUBSTRING(data,87,92) AS air_temperature,
+    ((FLOAT)SUBSTRING(data,87,92))/10.0F AS air_temperature,
     (INT)SUBSTRING(data,92,93) AS air_temperature_qual;
 
 /* Have a look at the result so far */
