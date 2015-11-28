@@ -25,17 +25,17 @@ SELECT SUBSTR(data,5,6) AS usaf FROM weather_2011 LIMIT 10;
 ```sql
 SELECT 
     SUBSTR(data,5,6) AS usaf,
-    SUBSTR(data,11,5) as wban, 
-    SUBSTR(data,16,8) as date, 
-    SUBSTR(data,24,4) as time,
-    SUBSTR(data,42,5) as report_type,
-    SUBSTR(data,61,3) as wind_direction, 
-    SUBSTR(data,64,1) as wind_direction_qual, 
-    SUBSTR(data,65,1) as wind_observation, 
-    SUBSTR(data,66,4) as wind_speed,
-    SUBSTR(data,70,1) as wind_speed_qual,
-    SUBSTR(data,88,5) as air_temperature, 
-    SUBSTR(data,93,1) as air_temperature_qual 
+    SUBSTR(data,11,5) AS wban, 
+    SUBSTR(data,16,8) AS date, 
+    SUBSTR(data,24,4) AS time,
+    SUBSTR(data,42,5) AS report_type,
+    SUBSTR(data,61,3) AS wind_direction, 
+    SUBSTR(data,64,1) AS wind_direction_qual, 
+    SUBSTR(data,65,1) AS wind_observation, 
+    SUBSTR(data,66,4) AS wind_speed,
+    SUBSTR(data,70,1) AS wind_speed_qual,
+    SUBSTR(data,88,5) AS air_temperature, 
+    SUBSTR(data,93,1) AS air_temperature_qual 
 FROM weather_2011 
 LIMIT 10;
 ```
@@ -66,17 +66,17 @@ CREATE VIEW weather AS
     SELECT 
         year,
         SUBSTR(`data`,5,6) AS `usaf`,
-        SUBSTR(`data`,11,5) as `wban`, 
-        SUBSTR(`data`,16,8) as `date`, 
-        SUBSTR(`data`,24,4) as `time`,
-        SUBSTR(`data`,42,5) as report_type,
-        SUBSTR(`data`,61,3) as wind_direction, 
-        SUBSTR(`data`,64,1) as wind_direction_qual, 
-        SUBSTR(`data`,65,1) as wind_observation, 
-        CAST(SUBSTR(`data`,66,4) AS FLOAT)/10 as wind_speed,
-        SUBSTR(`data`,70,1) as wind_speed_qual,
-        CAST(SUBSTR(`data`,88,5) AS FLOAT)/10 as air_temperature, 
-        SUBSTR(`data`,93,1) as air_temperature_qual 
+        SUBSTR(`data`,11,5) AS `wban`, 
+        SUBSTR(`data`,16,8) AS `date`, 
+        SUBSTR(`data`,24,4) AS `time`,
+        SUBSTR(`data`,42,5) AS report_type,
+        SUBSTR(`data`,61,3) AS wind_direction, 
+        SUBSTR(`data`,64,1) AS wind_direction_qual, 
+        SUBSTR(`data`,65,1) AS wind_observation, 
+        CAST(SUBSTR(`data`,66,4) AS FLOAT)/10 AS wind_speed,
+        SUBSTR(`data`,70,1) AS wind_speed_qual,
+        CAST(SUBSTR(`data`,88,5) AS FLOAT)/10 AS air_temperature, 
+        SUBSTR(`data`,93,1) AS air_temperature_qual 
     FROM weather_raw; 
 ```
 
