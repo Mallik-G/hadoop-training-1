@@ -76,6 +76,23 @@
                     <groupId>net.alchim31.maven</groupId>
                     <artifactId>scala-maven-plugin</artifactId>
                     <version>3.2.1</version>
+                    <executions>
+                        <execution>
+                            <id>scala-compile-first</id>
+                            <phase>process-resources</phase>
+                            <goals>
+                                <goal>add-source</goal>
+                                <goal>compile</goal>
+                            </goals>
+                        </execution>
+                        <execution>
+                            <id>scala-test-compile</id>
+                            <phase>process-test-resources</phase>
+                            <goals>
+                                <goal>testCompile</goal>
+                            </goals>
+                        </execution>
+                    </executions>
                 </plugin>
                 <plugin>
                     <groupId>org.scalatest</groupId>
@@ -137,6 +154,8 @@
         <module>hadoop-wordcount-03</module>
         <module>hadoop-weather-01</module>
         <module>hadoop-weather-02</module>
+        <module>spark-wordcount-01</module>
+        <module>spark-wordcount-02</module>
     </modules>
 
     <repositories>
