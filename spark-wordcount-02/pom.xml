@@ -4,9 +4,9 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <modelVersion>4.0.0</modelVersion>
     <groupId>de.dimajix.training</groupId>
-    <artifactId>spark-wordcount-01</artifactId>
+    <artifactId>spark-wordcount-02</artifactId>
     <version>0.1.0-cdh5.4.2</version>
-    <name>spark-wordcount-01</name>
+    <name>spark-wordcount-02</name>
 
     <parent>
         <groupId>de.dimajix.training</groupId>
