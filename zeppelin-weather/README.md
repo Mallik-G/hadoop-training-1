@@ -1,11 +1,20 @@
+# Weather Analysis
+
+This is a Zeppelin based analysis of the weather data.
+
+```
 %sql
 select * from training.ish limit 10
+```
 
 
+```
 %sql
 select * from training.weather limit 10
+```
 
 
+```
 %sql
 SELECT
   l.country,
@@ -38,3 +47,4 @@ FULL OUTER JOIN (
       w.wind_speed_qual = "1"
   GROUP BY ish.country) r
 ON l.country = r.country
+```

@@ -1,6 +1,9 @@
 val data = sc.textFile("alice")
 
 // Look inside
+data.take(10).foreach(println)
+
+// Look inside
 data.count()
 
 val sample = data.take(10)
