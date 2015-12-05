@@ -149,6 +149,7 @@
     </build>
 
     <modules>
+        <module>hadoop-skeleton</module>
         <module>hadoop-wordcount-01</module>
         <module>hadoop-wordcount-02</module>
         <module>hadoop-wordcount-03</module>
