@@ -155,6 +155,7 @@
         <module>hadoop-weather-01</module>
         <module>hadoop-weather-02</module>
         <module>spark-wordcount-mini</module>
+        <module>spark-skeleton</module>
         <module>spark-wordcount-01</module>
         <module>spark-wordcount-02</module>
     </modules>
