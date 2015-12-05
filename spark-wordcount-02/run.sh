@@ -1,6 +1,6 @@
 #!/bin/bash
 
-APP_NAME="spark-wordcount-01"
+APP_NAME="spark-wordcount-02"
 APP_MAIN="de.dimajix.training.spark.wordcount.WordCountDriver"
 APP_VERSION="0.1.0"
 CDH_VERSION="cdh5.4.2"
