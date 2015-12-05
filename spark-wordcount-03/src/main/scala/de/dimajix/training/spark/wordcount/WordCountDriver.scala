@@ -69,8 +69,22 @@ class WordCountDriver(args: Array[String]) {
       StructField("line", StringType, false) :: Nil
     )
     val input = sql.createDataFrame(raw_input.map(line => Row(line)), schema)
-    val words = input.explode("line","word") { line:String => line.split(" ") }
-    val wc = words.groupBy(words("word")).count.orderBy(desc("count"))
-    wc.saveAsParquetFile(outputPath)
+    input.registerTempTable("alice")
+    sql.sql(
+      """
+        |SELECT
+        |   txt.word, COUNT(txt.word) as count
+        |FROM (
+        |   SELECT
+        |     EXPLODE(SPLIT(line,' ')) AS word
+        |   FROM alice) as txt
+        |WHERE
+        |   txt.word <> ''
+        |GROUP BY
+        |   txt.word
+        |ORDER BY
+        |   count DESC
+      """.stripMargin)
+      .saveAsParquetFile(outputPath)
   }
 }

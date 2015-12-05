@@ -158,6 +158,7 @@
         <module>spark-skeleton</module>
         <module>spark-wordcount-01</module>
         <module>spark-wordcount-02</module>
+        <module>spark-wordcount-03</module>
         <module>spark-weather-01</module>
     </modules>
 
