@@ -79,6 +79,8 @@ class Driver(args: Array[String]) {
         .withColumn("year", weather("date").substr(0,4))
         .groupBy("country", "year")
         .agg(
+              col("year"),
+              col("country"),
               // The following is not supported in Spark 1.3
               // min(when(col("air_temperature_quality") === lit(1), col("air_temperature")).otherwise(9999)).as("temp_min"),
               // max(when(col("air_temperature_quality") === lit(1), col("air_temperature")).otherwise(-9999)).as("temp_max"),
