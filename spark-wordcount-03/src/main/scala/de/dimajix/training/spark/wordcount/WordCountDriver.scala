@@ -65,6 +65,8 @@ class WordCountDriver(args: Array[String]) {
   def run(sql: SQLContext) = {
     val raw_input = sql.sparkContext.textFile(inputPath)
 
+    sql.udf.register("SPLIT", (s:String,r:String) => s.split(r))
+
     val schema = StructType(
       StructField("line", StringType, false) :: Nil
     )
@@ -73,7 +75,7 @@ class WordCountDriver(args: Array[String]) {
     sql.sql(
       """
         |SELECT
-        |   txt.word, COUNT(txt.word) as count
+        |   txt.word, COUNT(txt.word) as freq
         |FROM (
         |   SELECT
         |     EXPLODE(SPLIT(line,' ')) AS word
@@ -83,7 +85,22 @@ class WordCountDriver(args: Array[String]) {
         |GROUP BY
         |   txt.word
         |ORDER BY
-        |   count DESC
+        |   freq DESC
+      """.stripMargin)
+      //.saveAsParquetFile(outputPath)
+
+    val words = input.explode("line","word") { line:String => line.split(" ") }
+    words.registerTempTable("txt")
+    sql.sql(
+      """
+        |SELECT
+        |   txt.word, COUNT(txt.word) as freq
+        |WHERE
+        |   txt.word <> ''
+        |GROUP BY
+        |   txt.word
+        |ORDER BY
+        |   freq DESC
       """.stripMargin)
       .saveAsParquetFile(outputPath)
   }
