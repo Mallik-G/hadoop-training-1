@@ -59,6 +59,7 @@ class Example(args: Array[String])  {
     val table = connection.getTable(TableName.valueOf(tableName))
 
     runPutGet(table)
+    runScan(table)
 
     table.close()
     connection.close()
