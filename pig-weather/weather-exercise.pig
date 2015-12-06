@@ -42,6 +42,26 @@ ish = LOAD 'weather/ish' USING org.apache.pig.piggybank.storage.CSVExcelStorage(
     max_temp,
     min_wind,
     max_wind
+
+    Step 1. Join weather and ish using usaf and wban
+
+    Step 2. Extract required fields from last dataset
+
+    Step 3. Filter only valid temperature entries (air_temperature_qual == 1)
+
+    Step 4. Group result by country code
+
+    Step 5. Generate min/max temperature
+
+    Step 6. Filter only valid temperature entries (air_temperature_qual == 1)
+
+    Step 7. Group result by country code
+
+    Step 8. Generate min/max wind
+
+    Step 9: Rename columns to nicer names
+
+    Step 10: Save result as CSV
 */
 
 
