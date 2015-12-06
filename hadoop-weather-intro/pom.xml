@@ -4,9 +4,9 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <modelVersion>4.0.0</modelVersion>
     <groupId>de.dimajix.training</groupId>
-    <artifactId>hadoop-weather-01</artifactId>
+    <artifactId>hadoop-weather-intro</artifactId>
     <version>0.1.0-cdh5.4.2</version>
-    <name>hadoop-weather-01</name>
+    <name>hadoop-weather-intro</name>
 
     <parent>
         <groupId>de.dimajix.training</groupId>

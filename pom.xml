@@ -152,7 +152,7 @@
         <module>hadoop-skeleton</module>
         <module>hadoop-wordcount-01</module>
         <module>hadoop-wordcount-02</module>
-        <module>hadoop-weather-01</module>
+        <module>hadoop-weather-intro</module>
         <module>hadoop-weather-exercise</module>
         <module>hadoop-weather-solution</module>
         <module>spark-wordcount-mini</module>
