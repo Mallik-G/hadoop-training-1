@@ -4,14 +4,14 @@ weather_2011.take(10).foreach(println)
 
 // Count data from all years
 var totals:Long = 0
-for(i <- 2009 to 2011) {
+for(i <- 2005 to 2011) {
   val wy = sc.textFile("/user/cloudera/weather/" + i.toString)
   totals = totals + wy.count()
 }
 totals
 
 // Do it in a more elegant way
-(2009 to 2011) map {i => sc.textFile("/user/cloudera/weather/" + i.toString).count()} reduce(_ + _)
+(2005 to 2011) map {i => sc.textFile("/user/cloudera/weather/" + i.toString).count()} reduce(_ + _)
 
 
 
@@ -38,7 +38,7 @@ def extractWeatherData(row:String) = {
   WeatherData(date,time,usaf,wban,airTemperatureQuality == '1',airTemperature.toFloat/10,windSpeedQuality == '1',windSpeed.toFloat/10)
 }
 
-val raw_weather_years = (2009 to 2011) map {i => sc.textFile("/user/cloudera/weather/" + i.toString)}
+val raw_weather_years = (2005 to 2011) map {i => sc.textFile("/user/cloudera/weather/" + i.toString)}
 val raw_weather = sc.union(raw_weather_years)
 val weather = raw_weather.map(extractWeatherData(_))
 
