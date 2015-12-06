@@ -4,6 +4,7 @@ import scala.collection.JavaConversions._
 
 import org.apache.spark.SparkConf
 import org.apache.spark.SparkContext
+import org.apache.spark.sql.DataFrame
 import org.apache.spark.sql.SQLContext
 import org.apache.spark.sql.functions._
 import org.apache.spark.sql.types.FloatType
@@ -62,35 +63,22 @@ class Driver(args: Array[String]) {
   }
 
   def run(sql: SQLContext) = {
-    // Load Weather data
-    val raw_weather = sql.sparkContext.textFile(inputPath)
-    val weather_rdd = raw_weather.map(WeatherData.extract)
-    val weather = sql.createDataFrame(weather_rdd, WeatherData.schema)
+    // 1. Load raw weather data from text file
 
-    // Load station data
-    val ish_raw = sql.sparkContext.textFile(stationsPath)
-    val ish_head = ish_raw.first
-    val ish_rdd = ish_raw
-      .filter(_ != ish_head)
-      .map(StationData.extract)
-    val ish = sql.createDataFrame(ish_rdd, StationData.schema)
+    // 2. Transform raw data into meaningful DataFrame. See WeatherData for helper functions
 
-    weather.join(ish, weather("usaf") === ish("usaf") && weather("wban") === ish("wban"))
-        .withColumn("year", weather("date").substr(0,4))
-        .groupBy("country", "year")
-        .agg(
-              col("year"),
-              col("country"),
-              // The following is not supported in Spark 1.3
-              // min(when(col("air_temperature_quality") === lit(1), col("air_temperature")).otherwise(9999)).as("temp_min"),
-              // max(when(col("air_temperature_quality") === lit(1), col("air_temperature")).otherwise(-9999)).as("temp_max"),
-              // min(when(col("wind_speed_quality") === lit(1), col("wind_speed")).otherwise(9999)).as("wind_min"),
-              // max(when(col("wind_speed_quality") === lit(1), col("wind_speed")).otherwise(-9999)).as("wind_max")
-              min(callUDF((q:Int,t:Float) => if (q == 1) t else 9999.toFloat, FloatType, col("air_temperature_quality"), col("air_temperature"))).as("temp_min"),
-              max(callUDF((q:Int,t:Float) => if (q == 1) t else -9999.toFloat, FloatType, col("air_temperature_quality"), col("air_temperature"))).as("temp_max"),
-              min(callUDF((q:Int,t:Float) => if (q == 1) t else 9999.toFloat, FloatType, col("wind_speed_quality"), col("wind_speed"))).as("wind_min"),
-              max(callUDF((q:Int,t:Float) => if (q == 1) t else -9999.toFloat, FloatType, col("wind_speed_quality"), col("wind_speed"))).as("wind_max")
-        )
-        .saveAsParquetFile(outputPath)
+    // 3. Load raw station data from text file
+
+    // 4. Transform raw data into meaningful DataFrame. See StationData for helper functions
+
+    // 5. Join both DataFrames and station code (wban and usaf)
+
+    // 6. Extract year from date
+
+    // 7. Group by country and year
+
+    // 8. Aggregate minimum/maximum values, pay attention to quality!
+
+    // 9. Save as ParquetFile
   }
 }

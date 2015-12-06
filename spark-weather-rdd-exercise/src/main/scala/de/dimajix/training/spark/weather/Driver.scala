@@ -4,6 +4,7 @@ import scala.collection.JavaConversions._
 
 import org.apache.spark.SparkConf
 import org.apache.spark.SparkContext
+import org.apache.spark.rdd.RDD
 import org.kohsuke.args4j.CmdLineException
 import org.kohsuke.args4j.CmdLineParser
 import org.kohsuke.args4j.Option
@@ -58,30 +59,24 @@ class Driver(args: Array[String]) {
   }
 
   def run(sc: SparkContext) = {
-    val raw_weather = sc.textFile(inputPath)
-    val weather = raw_weather.map(WeatherData.extract)
+    // 1. Load raw weather data from text file
 
-    val ish_raw = sc.textFile(stationsPath)
-    val ish_head = ish_raw.first
-    val ish = ish_raw
-      .filter(_ != ish_head)
-      .map(StationData.extract)
+    // 2. Transform raw data into meaningful RDD with WeatherData as object type
 
-    val weather_idx = weather.keyBy(x => x.usaf + x.wban)
-    val ish_idx = ish.keyBy(x => x.usaf + x.wban)
+    // 3. Load raw station data from text file
 
-    val weather_per_country_and_year = weather_idx
-      .join(ish_idx)
-      .map(x =>
-        (
-          (x._2._2.country,x._2._1.date.substring(0,4)),
-          x._2._1
-          )
-      )
+    // 4. Transform raw data into meaningful RDD with StationData as object type
 
-    val weather_minmax = weather_per_country_and_year
-      .aggregateByKey(WeatherMinMax())((x:WeatherMinMax,y:WeatherData)=>x.reduce(y),(x:WeatherMinMax,y:WeatherMinMax)=>x.reduce(y))
+    // 5. Create new RDD from weather RDD with station code as key
 
-    weather_minmax.saveAsTextFile(outputPath)
+    // 6. Create new RDD from station RDD with station code as key
+
+    // 7. Join both RDDs
+
+    // 8. Extract country, year as key and weather as value from joined RDD
+
+    // 9. Aggregate results for getting min and max information. Have a look at aggregateByKey in PairRDD
+
+    // 10. Save results as TextFile
   }
 }
