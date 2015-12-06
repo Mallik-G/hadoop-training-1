@@ -153,14 +153,17 @@
         <module>hadoop-wordcount-01</module>
         <module>hadoop-wordcount-02</module>
         <module>hadoop-weather-01</module>
-        <module>hadoop-weather-02</module>
+        <module>hadoop-weather-exercise</module>
+        <module>hadoop-weather-solution</module>
         <module>spark-wordcount-mini</module>
         <module>spark-skeleton</module>
-        <module>spark-wordcount-01</module>
-        <module>spark-wordcount-02</module>
-        <module>spark-wordcount-03</module>
-        <module>spark-weather-01</module>
-        <module>spark-weather-02</module>
+        <module>spark-wordcount-rdd</module>
+        <module>spark-wordcount-df</module>
+        <module>spark-wordcount-sql</module>
+        <module>spark-weather-rdd-exercise</module>
+        <module>spark-weather-rdd-solution</module>
+        <module>spark-weather-df-exercise</module>
+        <module>spark-weather-df-solution</module>
     </modules>
 
     <repositories>
