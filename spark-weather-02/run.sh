@@ -1,6 +1,6 @@
 #!/bin/bash
 
-APP_NAME="spark-weather-01"
+APP_NAME="spark-weather-02"
 APP_MAIN="de.dimajix.training.spark.weather.Driver"
 APP_VERSION="0.1.0"
 CDH_VERSION="cdh5.4.2"
