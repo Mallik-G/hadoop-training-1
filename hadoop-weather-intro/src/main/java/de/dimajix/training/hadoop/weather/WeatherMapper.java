@@ -54,9 +54,12 @@ class WeatherMapper extends Mapper<LongWritable,Text,Text,FloatWritable> {
         Character airTemperatureQuality = row.charAt(92);
         String airTemperature = row.substring(87,92);
 
+        // Lookup country
+        String countryCode = countries.get(station);
+
         // Only emit if quality is okay
-        if (airTemperatureQuality.charValue() == '1') {
-            country.set(countries.get(station));
+        if (countryCode != null && airTemperatureQuality.charValue() == '1') {
+            country.set(countryCode);
             temperature.set(Float.valueOf(airTemperature) / 10.f);
             context.write(country, temperature);
         }
