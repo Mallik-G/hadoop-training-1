@@ -8,12 +8,17 @@ You can simply build the example with Maven via
 
         mvn install
         
+## Preparing
+
+You need to provide the text to process inside hadoop in the users home
+at `wordcount-input`.
+
 
 ## Running
         
 The example also contains a small starter script. You can invoke the example via
         
-        run.sh -i <inputDir> -o <outputDir>
+        run.sh
         
 Before running the example you have to upload some text into HDFS. In this example we simply upload the README.md
 file itself:
