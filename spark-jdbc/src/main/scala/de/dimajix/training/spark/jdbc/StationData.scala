@@ -16,7 +16,7 @@ object StationData extends Serializable {
       StructField("country", StringType, false) ::
       StructField("fips", StringType, false) ::
       StructField("state", StringType, false) ::
-      StructField("call", StringType, false) ::
+      StructField("kall", StringType, false) ::
       StructField("latitude", IntegerType, true) ::
       StructField("longitude", IntegerType, true) ::
       StructField("elevation", IntegerType, true) ::
