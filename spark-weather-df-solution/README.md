@@ -8,7 +8,7 @@ This example requires weather data and station data to be present in HDFS.
 
 ## Running
 
-    ./run.sh --input weather/2011 --stations weather/ish --output weather/minmax
+    ./run.sh --input data/weather/2011 --stations data/weather/ish-history.csv --output data/weather/minmax
      
 ## Checking Result
 

@@ -37,7 +37,7 @@ class ExportDriver(args: Array[String]) {
   @Option(name = "--weather", usage = "weather dirs", metaVar = "<weatherDirectory>")
   private var inputPath: String = "data/weather/2005,data/weather/2006,data/weather/2007,data/weather/2008,data/weather/2009,data/weather/2010,data/weather/2011"
   @Option(name = "--stations", usage = "stations definitioons", metaVar = "<stationsPath>")
-  private var stationsPath: String = "data/weather/ish"
+  private var stationsPath: String = "data/weather/ish-history.csv"
   @Option(name = "--dburi", usage = "JDBC connection", metaVar = "<connection>")
   private var dburi: String = "jdbc:mysql://localhost/training"
   @Option(name = "--dbuser", usage = "JDBC username", metaVar = "<db_user>")

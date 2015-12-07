@@ -15,10 +15,19 @@ You need to create an empty database in some MySQL server. This can be done via
 
 ## Running
 
+First you need to export data from HDFS into MySQL.
+
     ./run_export.sh \
         --weather data/weather/20* \
-        --stations data/weather/ish-history.txt \
+        --stations data/weather/ish-history.csv \
         --dburi jdbc:mysql://localhost/training \
         --dbuser root \
         --dbpass cloudera
 
+Then we can run the analytics part
+
+    ./run_analyze.sh \
+        --output data/weather_minmax \
+        --dburi jdbc:mysql://localhost/training \
+        --dbuser root \
+        --dbpass cloudera
