@@ -6,6 +6,7 @@ import org.apache.spark.SparkConf
 import org.apache.spark.SparkContext
 import org.apache.spark.sql.SQLContext
 import org.apache.spark.sql.functions._
+import org.apache.spark.sql.types.DoubleType
 import org.apache.spark.sql.types.FloatType
 import org.kohsuke.args4j.CmdLineException
 import org.kohsuke.args4j.CmdLineParser
@@ -83,10 +84,10 @@ class AnalyzeDriver(args: Array[String]) {
         // max(when(col("air_temperature_quality") === lit(1), col("air_temperature")).otherwise(-9999)).as("temp_max"),
         // min(when(col("wind_speed_quality") === lit(1), col("wind_speed")).otherwise(9999)).as("wind_min"),
         // max(when(col("wind_speed_quality") === lit(1), col("wind_speed")).otherwise(-9999)).as("wind_max")
-        min(callUDF((q:Int,t:Float) => if (q == 1) t else 9999.toFloat, FloatType, col("air_temperature_quality"), col("air_temperature"))).as("temp_min"),
-        max(callUDF((q:Int,t:Float) => if (q == 1) t else -9999.toFloat, FloatType, col("air_temperature_quality"), col("air_temperature"))).as("temp_max"),
-        min(callUDF((q:Int,t:Float) => if (q == 1) t else 9999.toFloat, FloatType, col("wind_speed_quality"), col("wind_speed"))).as("wind_min"),
-        max(callUDF((q:Int,t:Float) => if (q == 1) t else -9999.toFloat, FloatType, col("wind_speed_quality"), col("wind_speed"))).as("wind_max")
+        min(callUDF((q:Int,t:Double) => if (q == 1) t else 9999.toDouble, DoubleType, col("air_temperature_quality"), col("air_temperature"))).as("temp_min"),
+        max(callUDF((q:Int,t:Double) => if (q == 1) t else -9999.toDouble, DoubleType, col("air_temperature_quality"), col("air_temperature"))).as("temp_max"),
+        min(callUDF((q:Int,t:Double) => if (q == 1) t else 9999.toDouble, DoubleType, col("wind_speed_quality"), col("wind_speed"))).as("wind_min"),
+        max(callUDF((q:Int,t:Double) => if (q == 1) t else -9999.toDouble, DoubleType, col("wind_speed_quality"), col("wind_speed"))).as("wind_max")
       )
       .saveAsParquetFile(outputPath)
   }
