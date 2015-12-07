@@ -11,7 +11,7 @@ You need to create an empty database in some MySQL server. This can be done via
     CREATE TABLE training;
     GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY PASSWORD '*D997577481B722A2996B58BCE11EF3C312AC0B89' WITH GRANT OPTION;
     FLUSH PRIVILEGES;
-    
+
 
 ## Running
 
