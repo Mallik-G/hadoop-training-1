@@ -1,4 +1,4 @@
-package de.dimajix.training.spark.wordcount
+package de.dimajix.training.spark.skeleton
 
 import scala.collection.JavaConversions._
 
