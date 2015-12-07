@@ -54,19 +54,23 @@ class WeatherMapper extends Mapper<LongWritable,Text,Text,WeatherData> {
         Character windSpeedQuality = row.charAt(69);
         String windSpeed = row.substring(65,69);
 
-        country.set(countries.get(station));
+        String countryCode = countries.get(station);
 
-        data.validTemperature = airTemperatureQuality == '1';
-        data.minTemperature = Float.valueOf(airTemperature) / 10.f;
-        data.maxTemperature = Float.valueOf(airTemperature) / 10.f;
+        if (countryCode != null) {
+            country.set(countries.get(station));
 
-        data.validWind = windSpeedQuality == '1';
-        data.minWind = Float.valueOf(windSpeed) / 10.f;
-        data.maxWind = Float.valueOf(windSpeed) / 10.f;
+            data.validTemperature = airTemperatureQuality == '1';
+            data.minTemperature = Float.valueOf(airTemperature) / 10.f;
+            data.maxTemperature = Float.valueOf(airTemperature) / 10.f;
 
-        context.getCounter("Weather Mapper","Valid Wind").increment(data.validWind ? 1 : 0);
-        context.getCounter("Weather Mapper","Valid Temperature").increment(data.validTemperature ? 1 : 0);
+            data.validWind = windSpeedQuality == '1';
+            data.minWind = Float.valueOf(windSpeed) / 10.f;
+            data.maxWind = Float.valueOf(windSpeed) / 10.f;
 
-        context.write(country, data);
+            context.getCounter("Weather Mapper", "Valid Wind").increment(data.validWind ? 1 : 0);
+            context.getCounter("Weather Mapper", "Valid Temperature").increment(data.validTemperature ? 1 : 0);
+
+            context.write(country, data);
+        }
     }
 }
