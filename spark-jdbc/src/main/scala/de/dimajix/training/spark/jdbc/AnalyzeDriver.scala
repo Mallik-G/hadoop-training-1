@@ -1,4 +1,4 @@
-package de.dimajix.training.spark.weather
+package de.dimajix.training.spark.jdbc
 
 import scala.collection.JavaConversions._
 
@@ -16,10 +16,10 @@ import org.slf4j.LoggerFactory
 /**
   * Created by kaya on 03.12.15.
   */
-object Driver {
+object AnalyzeDriver {
   def main(args: Array[String]) : Unit = {
     // First create driver, so can already process arguments
-    val driver = new Driver(args)
+    val driver = new AnalyzeDriver(args)
 
     // Now create SparkContext (possibly flooding the console with logging information)
     val conf = new SparkConf()
@@ -33,8 +33,8 @@ object Driver {
 }
 
 
-class Driver(args: Array[String]) {
-  private val logger: Logger = LoggerFactory.getLogger(classOf[Driver])
+class AnalyzeDriver(args: Array[String]) {
+  private val logger: Logger = LoggerFactory.getLogger(classOf[AnalyzeDriver])
 
   @Option(name = "--dburi", usage = "JDBC connection", metaVar = "<connection>")
   private var dburi: String = "jdbc:mysql://localhost/training"
