@@ -40,6 +40,6 @@ object WeatherData extends Serializable {
     val windSpeedQuality = row.charAt(69) - '0'.toInt
     val windSpeed = row.substring(65,69).toDouble/10
 
-    Row(date,time,timestamp,usaf,wban,airTemperatureQuality,airTemperature,windSpeedQuality,windSpeed.toFloat)
+    Row(date,time,timestamp,usaf,wban,airTemperatureQuality,airTemperature,windSpeedQuality,windSpeed)
   }
 }
