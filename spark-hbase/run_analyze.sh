@@ -1,6 +1,6 @@
 #!/bin/bash
 
-APP_NAME="spark-jdbc"
+APP_NAME="spark-hbase"
 APP_MAIN="de.dimajix.training.spark.hbase.AnalyzeDriver"
 APP_VERSION="0.1.0"
 CDH_VERSION="cdh5.4.2"
