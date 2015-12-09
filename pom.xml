@@ -518,6 +518,16 @@
                 <groupId>org.apache.hbase</groupId>
                 <artifactId>hbase-common</artifactId>
                 <version>${hbase.version}-${cdh.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <artifactId>htrace-core</artifactId>
+                        <groupId>org.apache.htrace</groupId>
+                    </exclusion>
+                    <exclusion>
+                        <artifactId>jetty-util</artifactId>
+                        <groupId>org.mortbay.jetty</groupId>
+                    </exclusion>
+                </exclusions>
             </dependency>
 
             <dependency>
