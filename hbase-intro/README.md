@@ -12,5 +12,5 @@ create 'training:mytable', 'f1'
 
 ## Running
 
-    ./run.sh --table training.mytable --family f1
+    ./run.sh --table training:mytable --family f1
     
