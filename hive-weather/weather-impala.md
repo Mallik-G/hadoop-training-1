@@ -3,6 +3,27 @@
 Since Impala cannot use the SERDE from above, we need to convert the table
 in Hive. We use Parquet as file format.
 
+
+```sql
+CREATE EXTERNAL TABLE ish(
+  usaf STRING,
+    wban STRING,
+    name STRING,
+    country STRING,
+    fips STRING,
+    state STRING,
+    call STRING,
+    latitude INT,
+    longitude INT,
+    elevation INT,
+    date_begin STRING,
+    date_end STRING)
+ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
+STORED AS TEXTFILE
+LOCATION '/user/cloudera/data/weather/ish';
+```
+
+
 ```sql
 CREATE TABLE ish 
     STORED AS PARQUET 

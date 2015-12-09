@@ -1,4 +1,5 @@
-package de.dimajix.training.spark.weather
+package de.dimajix.training.spark.hbase
+
 
 object WeatherData {
   def extract(row:String) = {

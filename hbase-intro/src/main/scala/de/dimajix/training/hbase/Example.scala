@@ -88,7 +88,7 @@ class Example(args: Array[String])  {
     val scanner = table.getScanner(scan)
     for (rr <- scanner)
     {
-      System.out.println("Found row: " + rr);
+      System.out.println("Found row: " + rr)
     }
 
     scanner.close()

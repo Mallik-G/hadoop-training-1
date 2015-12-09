@@ -1,5 +1,5 @@
 /* Load raw data */
-weather_raw = LOAD 'weather/2011' AS (data:CHARARRAY);
+weather_raw = LOAD 'data/weather/2011' AS (data:CHARARRAY);
 
 /* Extract columns from raw data - note different indexes in SUBSTRING compared to Hive/Impala! */
 weather = FOREACH weather_raw GENERATE
@@ -24,7 +24,7 @@ ILLUSTRATE weather;
 REGISTER '/usr/lib/pig/piggybank.jar';
 
 /* Now load ish lookup table */
-ish = LOAD 'weather/ish' USING org.apache.pig.piggybank.storage.CSVExcelStorage() AS (
+ish = LOAD 'data/weather/ish-history.csv' USING org.apache.pig.piggybank.storage.CSVExcelStorage() AS (
     usaf:CHARARRAY,
     wban:CHARARRAY,
     name:CHARARRAY,
@@ -72,4 +72,4 @@ minmax_by_country = FOREACH weather_by_country GENERATE
 ILLUSTRATE minmax_by_country;
 
 /* Store results */
-STORE minmax_by_country INTO 'weather/minmax' USING org.apache.pig.piggybank.storage.CSVExcelStorage();
+STORE minmax_by_country INTO 'data/output/minmax' USING org.apache.pig.piggybank.storage.CSVExcelStorage();

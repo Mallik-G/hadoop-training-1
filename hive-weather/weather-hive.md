@@ -111,7 +111,7 @@ WITH SERDEPROPERTIES (
    "quoteChar"     = "\"",
    "escapeChar"    = "\\"
 )
-STORED AS TEXTFILE;
+STORED AS TEXTFILE
 LOAD DATA LOCAL INPATH 'data/weather/ish-history.csv' OVERWRITE INTO TABLE ish_raw;
 ```
 

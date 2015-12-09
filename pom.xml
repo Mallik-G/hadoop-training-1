@@ -165,6 +165,7 @@
         <module>spark-weather-df-exercise</module>
         <module>spark-weather-df-solution</module>
         <module>spark-jdbc</module>
+        <module>spark-hbase</module>
         <module>hbase-intro</module>
     </modules>
 
@@ -200,6 +201,12 @@
                 <groupId>org.apache.spark</groupId>
                 <artifactId>spark-hive_2.10</artifactId>
                 <version>${spark.version}-${cdh.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.cloudera</groupId>
+                <artifactId>spark-hbase</artifactId>
+                <version>0.0.3-clabs-SNAPSHOT</version>
             </dependency>
 
             <dependency>
