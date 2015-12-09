@@ -427,10 +427,6 @@
                         <artifactId>netty</artifactId>
                         <groupId>io.netty</groupId>
                     </exclusion>
-                    <exclusion>
-                        <artifactId>htrace-core</artifactId>
-                        <groupId>org.apache.htrace</groupId>
-                    </exclusion>
                 </exclusions>
             </dependency>
 
