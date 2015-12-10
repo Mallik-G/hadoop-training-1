@@ -11,3 +11,5 @@ create 'training:weather', 'cf'
 
 
 ## Running
+
+    ./run-export.sh --weather data/weather/2011
