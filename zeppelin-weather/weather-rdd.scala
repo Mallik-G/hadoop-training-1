@@ -48,9 +48,8 @@ case class StationData(
     wban:String,
     name:String,
     country:String,
-    fips:String,
     state:String,
-    call:String,
+    icao:String,
     latitude:Int,
     longitude:Int,
     elevation:Int,
@@ -69,20 +68,20 @@ def extractStationData(row:String) = {
   val latitude = getInt(columns(7))
   val longitude = getInt(columns(8))
   val elevation = getInt(columns(9))
-  StationData(columns(0),columns(1),columns(2),columns(3),columns(4),columns(5),columns(6),latitude,longitude,elevation,columns(10),columns(11))
+  StationData(columns(0),columns(1),columns(2),columns(3),columns(4),columns(5),latitude,longitude,elevation,columns(9),columns(10))
 }
 
-val ish_raw = sc.textFile("/user/cloudera/weather/ish")
-val ish_head = ish_raw.first
-val ish = ish_raw
-    .filter(_ != ish_head)
+val isd_raw = sc.textFile("/user/cloudera/weather/isd")
+val isd_head = isd_raw.first
+val isd = isd_raw
+    .filter(_ != isd_head)
     .map(extractStationData)
 
 val weather_idx = weather.keyBy(x => x.usaf + x.wban)
-val ish_idx = ish.keyBy(x => x.usaf + x.wban)
+val isd_idx = isd.keyBy(x => x.usaf + x.wban)
 
 val weather_per_country_and_year = weather_idx
-    .join(ish_idx)
+    .join(isd_idx)
     .map(x =>
         (
           (x._2._2.country,x._2._1.date.substring(0,4)),
